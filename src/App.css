@@ -1,38 +1,404 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #1a1a2e;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  min-height: 100vh;
+  color: #e0e0e0;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 2px solid #d4af37;
+}
+
+.App-header h1 {
+  margin: 0;
+  color: #d4af37;
+  font-size: 1.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.subtitle {
+  margin: 0.25rem 0 0;
+  color: #a0a0a0;
+  font-size: 0.85rem;
+}
+
+.calculator {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.main-layout {
+  display: flex;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.skills-column {
+  flex: 1;
+  min-width: 400px;
+}
+
+.unlocks-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  flex-shrink: 0;
+  width: 900px;
+}
+
+.total-points {
+  background: linear-gradient(135deg, #2d2d44 0%, #1e1e30 100%);
+  border: 2px solid #d4af37;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.points-row {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.points-row.spent .points-value {
+  color: #ff6b6b;
+  font-size: 1.25rem;
+}
+
+.points-row.remaining .points-value {
+  color: #51cf66;
+  font-size: 1.5rem;
+}
+
+.points-row.remaining .points-value.negative {
+  color: #ff6b6b;
+}
+
+.points-row.breach {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.breach-input {
+  width: 70px;
+  padding: 0.25rem;
+  font-size: 1rem;
+  text-align: center;
+  background: #1a1a2e;
+  border: 1px solid #4a4a6a;
+  border-radius: 4px;
+  color: #51cf66;
+  font-weight: bold;
+}
+
+.breach-input:focus {
+  outline: none;
+  border-color: #d4af37;
+}
+
+.points-label {
+  font-size: 0.7rem;
+  color: #a0a0a0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.points-value {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #d4af37;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.quick-actions {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-.App-link {
-  color: #61dafb;
+.quick-actions button {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  background: linear-gradient(135deg, #3d3d5c 0%, #2d2d44 100%);
+  border: 1px solid #4a4a6a;
+  border-radius: 6px;
+  color: #e0e0e0;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.quick-actions button:hover {
+  background: linear-gradient(135deg, #4a4a6a 0%, #3d3d5c 100%);
+  border-color: #d4af37;
+  transform: translateY(-2px);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.skill-card {
+  background: linear-gradient(135deg, #2d2d44 0%, #1e1e30 100%);
+  border: 1px solid #3d3d5c;
+  border-radius: 6px;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  transition: all 0.15s ease;
+}
+
+.skill-card:hover {
+  border-color: #d4af37;
+}
+
+.skill-icon {
+  width: 24px;
+  height: 24px;
+  image-rendering: pixelated;
+}
+
+.skill-name {
+  font-size: 0.7rem;
+  color: #c0c0c0;
+  text-align: center;
+}
+
+.skill-input {
+  width: 50px;
+  padding: 0.25rem;
+  font-size: 0.9rem;
+  text-align: center;
+  background: #1a1a2e;
+  border: 1px solid #4a4a6a;
+  border-radius: 4px;
+  color: #fff;
+  transition: border-color 0.2s ease;
+}
+
+.skill-input:focus {
+  outline: none;
+  border-color: #d4af37;
+}
+
+.skill-input::-webkit-inner-spin-button,
+.skill-input::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+.skill-points {
+  font-size: 0.65rem;
+  color: #d4af37;
+  font-weight: 500;
+}
+
+.unlocks-container {
+  margin: 1.5rem 0;
+}
+
+.unlocks-container h2 {
+  color: #d4af37;
+  font-size: 1.1rem;
+  margin: 0 0 1rem;
+  text-align: center;
+}
+
+.unlock-section {
+  background: linear-gradient(135deg, #2d2d44 0%, #1e1e30 100%);
+  border: 1px solid #3d3d5c;
+  border-radius: 6px;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.unlock-section h3 {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  color: #c0c0c0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-cost {
+  color: #ff6b6b;
+  font-size: 0.8rem;
+}
+
+.unlock-grid {
+  flex: 1;
+  column-count: auto;
+  column-width: 90px;
+  column-gap: 0.3rem;
+}
+
+.unlock-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.5rem;
+  background: #1a1a2e;
+  border: 1px solid #3d3d5c;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 0.75rem;
+  margin-bottom: 0.3rem;
+  break-inside: avoid;
+}
+
+.unlock-item:hover {
+  border-color: #5a5a7a;
+}
+
+.unlock-item.selected {
+  border-color: #d4af37;
+  background: #2a2a3e;
+}
+
+.unlock-item input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: #d4af37;
+}
+
+.unlock-name {
+  flex: 1;
+  color: #e0e0e0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.unlock-cost {
+  color: #a0a0a0;
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+.formula-info {
+  background: linear-gradient(135deg, #2d2d44 0%, #1e1e30 100%);
+  border: 1px solid #3d3d5c;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  font-size: 0.8rem;
+}
+
+.formula-info h3 {
+  margin: 0 0 0.5rem;
+  color: #d4af37;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.formula-info ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: #a0a0a0;
+}
+
+.formula-info li {
+  margin-bottom: 0.2rem;
+}
+
+@media (max-width: 1400px) {
+  .main-layout {
+    flex-direction: column;
   }
-  to {
-    transform: rotate(360deg);
+
+  .skills-column {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .unlocks-columns {
+    width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .unlocks-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .unlock-grid {
+    column-width: 140px;
+  }
+}
+
+@media (max-width: 600px) {
+  .App-header h1 {
+    font-size: 1.25rem;
+  }
+
+  .calculator {
+    padding: 0.5rem;
+  }
+
+  .total-points {
+    flex-direction: row;
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+
+  .points-value {
+    font-size: 1rem;
+  }
+
+  .points-row.spent .points-value,
+  .points-row.remaining .points-value {
+    font-size: 1rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.4rem;
+  }
+
+  .skill-card {
+    padding: 0.4rem;
+  }
+
+  .skill-name {
+    font-size: 0.65rem;
+  }
+
+  .quick-actions {
+    flex-wrap: wrap;
+  }
+
+  .unlock-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .unlock-item {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.4rem;
   }
 }
