@@ -196,6 +196,10 @@ function App() {
   const [selectedSigils, setSelectedSigils] = useState<Set<string>>(savedState.sigils);
   const [selectedAttunable, setSelectedAttunable] = useState<Set<string>>(savedState.attunable);
   const [breachPoints, setBreachPoints] = useState<number>(savedState.breachPoints);
+  const [showImportModal, setShowImportModal] = useState(false);
+  const [showExportModal, setShowExportModal] = useState(false);
+  const [importText, setImportText] = useState('');
+  const [importError, setImportError] = useState('');
 
   useEffect(() => {
     const state = {
@@ -207,6 +211,35 @@ function App() {
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   }, [levels, selectedQuests, selectedSigils, selectedAttunable, breachPoints]);
+
+  const handleExport = () => {
+    const exportData = {
+      levels,
+      quests: Array.from(selectedQuests),
+      sigils: Array.from(selectedSigils),
+      attunable: Array.from(selectedAttunable),
+      breachPoints,
+    };
+    const exportString = btoa(JSON.stringify(exportData));
+    navigator.clipboard.writeText(exportString);
+    setShowExportModal(true);
+  };
+
+  const handleImport = () => {
+    try {
+      const decoded = JSON.parse(atob(importText.trim()));
+      if (decoded.levels) setLevels(decoded.levels);
+      if (decoded.quests) setSelectedQuests(new Set(decoded.quests));
+      if (decoded.sigils) setSelectedSigils(new Set(decoded.sigils));
+      if (decoded.attunable) setSelectedAttunable(new Set(decoded.attunable));
+      if (decoded.breachPoints !== undefined) setBreachPoints(decoded.breachPoints);
+      setShowImportModal(false);
+      setImportText('');
+      setImportError('');
+    } catch (e) {
+      setImportError('Invalid import data. Please check and try again.');
+    }
+  };
 
   const handleBreachPointsChange = (value: string) => {
     const numValue = parseInt(value) || 0;
@@ -280,6 +313,10 @@ function App() {
               {remainingPoints.toLocaleString()}
             </span>
           </div>
+          <div className="import-export-buttons">
+            <button onClick={handleExport} className="export-btn">Export</button>
+            <button onClick={() => setShowImportModal(true)} className="import-btn">Import</button>
+          </div>
         </div>
 
         <div className="main-layout">
@@ -337,6 +374,38 @@ function App() {
           </div>
         </div>
       </main>
+
+      {showImportModal && (
+        <div className="modal-overlay" onClick={() => setShowImportModal(false)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <h2>Import Build</h2>
+            <p>Paste your exported build code below:</p>
+            <textarea
+              value={importText}
+              onChange={(e) => setImportText(e.target.value)}
+              placeholder="Paste export code here..."
+              rows={4}
+            />
+            {importError && <p className="import-error">{importError}</p>}
+            <div className="modal-buttons">
+              <button onClick={() => setShowImportModal(false)} className="cancel-btn">Cancel</button>
+              <button onClick={handleImport} className="confirm-btn">Import</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showExportModal && (
+        <div className="modal-overlay" onClick={() => setShowExportModal(false)}>
+          <div className="modal modal-small" onClick={(e) => e.stopPropagation()}>
+            <h2>Build Exported!</h2>
+            <p>Your build has been copied to clipboard. Share it with others!</p>
+            <div className="modal-buttons">
+              <button onClick={() => setShowExportModal(false)} className="confirm-btn">OK</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

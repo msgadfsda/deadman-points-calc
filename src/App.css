@@ -68,6 +68,7 @@ body {
   display: flex;
   justify-content: center;
   gap: 2rem;
+  position: relative;
 }
 
 .points-row {
@@ -325,6 +326,135 @@ body {
 
 .formula-info li {
   margin-bottom: 0.2rem;
+}
+
+.import-export-buttons {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.export-btn,
+.import-btn {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  background: linear-gradient(135deg, #2d5a2d 0%, #1e3d1e 100%);
+  border: 1px solid #3d7a3d;
+  border-radius: 6px;
+  color: #e0e0e0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.export-btn:hover,
+.import-btn:hover {
+  background: linear-gradient(135deg, #3d7a3d 0%, #2d5a2d 100%);
+  border-color: #51cf66;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: linear-gradient(135deg, #2d2d44 0%, #1e1e30 100%);
+  border: 2px solid #d4af37;
+  border-radius: 10px;
+  padding: 1.5rem;
+  max-width: 500px;
+  width: 90%;
+}
+
+.modal.modal-small {
+  max-width: 350px;
+  text-align: center;
+}
+
+.modal h2 {
+  margin: 0 0 0.5rem;
+  color: #d4af37;
+}
+
+.modal p {
+  margin: 0 0 1rem;
+  color: #a0a0a0;
+  font-size: 0.9rem;
+}
+
+.modal textarea {
+  width: 100%;
+  padding: 0.75rem;
+  background: #1a1a2e;
+  border: 1px solid #4a4a6a;
+  border-radius: 6px;
+  color: #fff;
+  font-family: monospace;
+  font-size: 0.85rem;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.modal textarea:focus {
+  outline: none;
+  border-color: #d4af37;
+}
+
+.import-error {
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  margin: 0.5rem 0 0;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.modal-small .modal-buttons {
+  justify-content: center;
+}
+
+.modal-buttons button {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-btn {
+  background: linear-gradient(135deg, #3d3d5c 0%, #2d2d44 100%);
+  border: 1px solid #4a4a6a;
+  color: #e0e0e0;
+}
+
+.cancel-btn:hover {
+  background: linear-gradient(135deg, #4a4a6a 0%, #3d3d5c 100%);
+}
+
+.confirm-btn {
+  background: linear-gradient(135deg, #2d5a2d 0%, #1e3d1e 100%);
+  border: 1px solid #3d7a3d;
+  color: #e0e0e0;
+}
+
+.confirm-btn:hover {
+  background: linear-gradient(135deg, #3d7a3d 0%, #2d5a2d 100%);
+  border-color: #51cf66;
 }
 
 @media (max-width: 1400px) {
