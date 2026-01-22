@@ -265,11 +265,10 @@ function App() {
 
   const skillPoints = Object.values(levels).reduce(
     (sum, level) => sum + calculateDMMPoints(level),
-    0
+    175
   );
 
-  const basePoints = 175;
-  const totalEarnedPoints = basePoints + skillPoints + breachPoints;
+  const totalEarnedPoints = skillPoints + breachPoints;
   const questCost = QUESTS.filter(q => selectedQuests.has(q.name)).reduce((sum, q) => sum + q.cost, 0);
   const sigilCost = SIGILS.filter(s => selectedSigils.has(s.name)).reduce((sum, s) => sum + s.cost, 0);
   const attunableCost = ATTUNABLE_SIGILS.filter(a => selectedAttunable.has(a.name)).reduce((sum, a) => sum + a.cost, 0);
