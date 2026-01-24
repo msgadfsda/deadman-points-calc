@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/deadman-points-calc/static/css/main.36022bda.css",
+    "main.css": "/deadman-points-calc/static/css/main.d2870f7a.css",
     "main.js": "/deadman-points-calc/static/js/main.73223d8c.js",
     "static/js/453.507ae17a.chunk.js": "/deadman-points-calc/static/js/453.507ae17a.chunk.js",
     "index.html": "/deadman-points-calc/index.html",
-    "main.36022bda.css.map": "/deadman-points-calc/static/css/main.36022bda.css.map",
+    "main.d2870f7a.css.map": "/deadman-points-calc/static/css/main.d2870f7a.css.map",
     "main.73223d8c.js.map": "/deadman-points-calc/static/js/main.73223d8c.js.map",
     "453.507ae17a.chunk.js.map": "/deadman-points-calc/static/js/453.507ae17a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.36022bda.css",
+    "static/css/main.d2870f7a.css",
     "static/js/main.73223d8c.js"
   ]
 }
