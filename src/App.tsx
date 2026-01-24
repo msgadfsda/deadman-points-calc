@@ -6,6 +6,7 @@ const STORAGE_KEY = 'dmm-calculator-state';
 interface Skill {
   name: string;
   icon: string;
+  minLevel?: number;
 }
 
 interface Unlock {
@@ -15,13 +16,13 @@ interface Unlock {
 
 const SKILLS: Skill[] = [
   { name: 'Attack', icon: 'https://oldschool.runescape.wiki/images/Attack_icon.png' },
-  { name: 'Hitpoints', icon: 'https://oldschool.runescape.wiki/images/Hitpoints_icon.png' },
+  { name: 'Hitpoints', icon: 'https://oldschool.runescape.wiki/images/Hitpoints_icon.png', minLevel: 10 },
   { name: 'Mining', icon: 'https://oldschool.runescape.wiki/images/Mining_icon.png' },
   { name: 'Strength', icon: 'https://oldschool.runescape.wiki/images/Strength_icon.png' },
   { name: 'Agility', icon: 'https://oldschool.runescape.wiki/images/Agility_icon.png' },
   { name: 'Smithing', icon: 'https://oldschool.runescape.wiki/images/Smithing_icon.png' },
   { name: 'Defence', icon: 'https://oldschool.runescape.wiki/images/Defence_icon.png' },
-  { name: 'Herblore', icon: 'https://oldschool.runescape.wiki/images/Herblore_icon.png' },
+  { name: 'Herblore', icon: 'https://oldschool.runescape.wiki/images/Herblore_icon.png', minLevel: 3 },
   { name: 'Fishing', icon: 'https://oldschool.runescape.wiki/images/Fishing_icon.png' },
   { name: 'Ranged', icon: 'https://oldschool.runescape.wiki/images/Ranged_icon.png' },
   { name: 'Thieving', icon: 'https://oldschool.runescape.wiki/images/Thieving_icon.png' },
@@ -164,13 +165,22 @@ function UnlockSection({ title, unlocks, selected, onToggle }: UnlockSectionProp
   );
 }
 
+function getMinLevel(skillName: string): number {
+  const skill = SKILLS.find(s => s.name === skillName);
+  return skill?.minLevel || 1;
+}
+
+function getDefaultLevels(): Record<string, number> {
+  return Object.fromEntries(SKILLS.map(skill => [skill.name, skill.minLevel || 1]));
+}
+
 function loadSavedState() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       const parsed = JSON.parse(saved);
       return {
-        levels: parsed.levels || Object.fromEntries(SKILLS.map(skill => [skill.name, 1])),
+        levels: parsed.levels || getDefaultLevels(),
         quests: new Set<string>(parsed.quests || []),
         sigils: new Set<string>(parsed.sigils || []),
         attunable: new Set<string>(parsed.attunable || []),
@@ -181,7 +191,7 @@ function loadSavedState() {
     console.error('Failed to load saved state:', e);
   }
   return {
-    levels: Object.fromEntries(SKILLS.map(skill => [skill.name, 1])),
+    levels: getDefaultLevels(),
     quests: new Set<string>(),
     sigils: new Set<string>(),
     attunable: new Set<string>(),
@@ -243,13 +253,14 @@ function App() {
 
   const handleBreachPointsChange = (value: string) => {
     const numValue = parseInt(value) || 0;
-    const clampedValue = Math.min(5000, Math.max(0, numValue));
+    const clampedValue = Math.min(75000, Math.max(0, numValue));
     setBreachPoints(clampedValue);
   };
 
   const handleLevelChange = (skillName: string, value: string) => {
-    const numValue = parseInt(value) || 1;
-    const clampedValue = Math.min(99, Math.max(1, numValue));
+    const minLevel = getMinLevel(skillName);
+    const numValue = parseInt(value) || minLevel;
+    const clampedValue = Math.min(99, Math.max(minLevel, numValue));
     setLevels(prev => ({ ...prev, [skillName]: clampedValue }));
   };
 
@@ -265,7 +276,7 @@ function App() {
 
   const skillPoints = Object.values(levels).reduce(
     (sum, level) => sum + calculateDMMPoints(level),
-    175
+    135
   );
 
   const totalEarnedPoints = skillPoints + breachPoints;
@@ -276,7 +287,7 @@ function App() {
   const remainingPoints = totalEarnedPoints - totalUnlockCost;
 
   const setAllLevels = (level: number) => {
-    setLevels(Object.fromEntries(SKILLS.map(skill => [skill.name, level])));
+    setLevels(Object.fromEntries(SKILLS.map(skill => [skill.name, Math.max(level, skill.minLevel || 1)])));
   };
 
   return (
@@ -297,7 +308,7 @@ function App() {
             <input
               type="number"
               min="0"
-              max="5000"
+              max="75000"
               value={breachPoints}
               onChange={(e) => handleBreachPointsChange(e.target.value)}
               className="breach-input"
@@ -338,7 +349,7 @@ function App() {
                   <span className="skill-name">{skill.name}</span>
                   <input
                     type="number"
-                    min="1"
+                    min={skill.minLevel || 1}
                     max="99"
                     value={levels[skill.name]}
                     onChange={(e) => handleLevelChange(skill.name, e.target.value)}
