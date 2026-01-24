@@ -532,3 +532,350 @@ body {
     padding: 0.25rem 0.4rem;
   }
 }
+
+/* Tab Navigation */
+.tab-buttons {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.tab-buttons button {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  background: linear-gradient(135deg, #2d2d44 0%, #1e1e30 100%);
+  border: 1px solid #3d3d5c;
+  border-radius: 6px 6px 0 0;
+  color: #a0a0a0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-buttons button:hover {
+  background: linear-gradient(135deg, #3d3d5c 0%, #2d2d44 100%);
+  color: #e0e0e0;
+}
+
+.tab-buttons button.active {
+  background: linear-gradient(135deg, #3d3d5c 0%, #2d2d44 100%);
+  border-color: #d4af37;
+  border-bottom-color: transparent;
+  color: #d4af37;
+}
+
+.tab-content {
+  background: linear-gradient(135deg, #2d2d44 0%, #1e1e30 100%);
+  border: 1px solid #3d3d5c;
+  border-radius: 0 6px 6px 6px;
+  padding: 0.75rem;
+  min-height: 300px;
+}
+
+.tab-total {
+  margin-top: 0.75rem;
+  padding: 0.5rem;
+  background: #1a1a2e;
+  border-radius: 4px;
+  text-align: center;
+  color: #d4af37;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+/* Simple Input Tab (Collection Log) */
+.simple-input-tab {
+  text-align: center;
+  padding: 1rem;
+}
+
+.simple-input-tab h3 {
+  margin: 0 0 0.25rem;
+  color: #d4af37;
+  font-size: 1rem;
+}
+
+.simple-input-tab p {
+  margin: 0 0 1rem;
+  color: #a0a0a0;
+  font-size: 0.8rem;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.input-row label {
+  color: #c0c0c0;
+  font-size: 0.9rem;
+}
+
+.input-row input {
+  width: 80px;
+  padding: 0.4rem;
+  font-size: 1rem;
+  text-align: center;
+  background: #1a1a2e;
+  border: 1px solid #4a4a6a;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.input-row input:focus {
+  outline: none;
+  border-color: #d4af37;
+}
+
+/* Tier Input Tab (Clues, Diaries, Combat Achievements) */
+.tier-input-tab h3 {
+  margin: 0 0 0.25rem;
+  color: #d4af37;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.tier-input-tab p {
+  margin: 0 0 0.75rem;
+  color: #a0a0a0;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.tier-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.tier-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  background: #1a1a2e;
+  border: 1px solid #3d3d5c;
+  border-radius: 4px;
+}
+
+.tier-name {
+  flex: 1;
+  color: #c0c0c0;
+  font-size: 0.85rem;
+}
+
+.tier-row input {
+  width: 60px;
+  padding: 0.3rem;
+  font-size: 0.85rem;
+  text-align: center;
+  background: #2d2d44;
+  border: 1px solid #4a4a6a;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.tier-row input:focus {
+  outline: none;
+  border-color: #d4af37;
+}
+
+.tier-points {
+  min-width: 60px;
+  text-align: right;
+  color: #d4af37;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Boss Input Tab */
+.boss-input-tab h3 {
+  margin: 0 0 0.25rem;
+  color: #d4af37;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.boss-input-tab p {
+  margin: 0 0 0.75rem;
+  color: #a0a0a0;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.boss-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.3rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.boss-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.5rem;
+  background: #1a1a2e;
+  border: 1px solid #3d3d5c;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+.boss-name {
+  flex: 1;
+  color: #c0c0c0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.boss-pts {
+  color: #a0a0a0;
+  font-size: 0.7rem;
+  min-width: 35px;
+}
+
+.boss-row input {
+  width: 45px;
+  padding: 0.2rem;
+  font-size: 0.8rem;
+  text-align: center;
+  background: #2d2d44;
+  border: 1px solid #4a4a6a;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.boss-row input:focus {
+  outline: none;
+  border-color: #d4af37;
+}
+
+.boss-total {
+  min-width: 45px;
+  text-align: right;
+  color: #d4af37;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Scrollbar styling for boss grid */
+.boss-grid::-webkit-scrollbar {
+  width: 8px;
+}
+
+.boss-grid::-webkit-scrollbar-track {
+  background: #1a1a2e;
+  border-radius: 4px;
+}
+
+.boss-grid::-webkit-scrollbar-thumb {
+  background: #4a4a6a;
+  border-radius: 4px;
+}
+
+.boss-grid::-webkit-scrollbar-thumb:hover {
+  background: #5a5a7a;
+}
+
+@media (max-width: 600px) {
+  .tab-buttons {
+    justify-content: center;
+  }
+
+  .tab-buttons button {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  .boss-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Reset Buttons */
+.global-reset-container {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.global-reset-btn {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  background: linear-gradient(135deg, #5a2d2d 0%, #3d1e1e 100%);
+  border: 1px solid #7a3d3d;
+  border-radius: 6px;
+  color: #e0e0e0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.global-reset-btn:hover {
+  background: linear-gradient(135deg, #7a3d3d 0%, #5a2d2d 100%);
+  border-color: #ff6b6b;
+}
+
+.tab-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.tab-header h3 {
+  margin: 0;
+  color: #d4af37;
+  font-size: 1rem;
+}
+
+.tab-reset-btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.7rem;
+  background: linear-gradient(135deg, #5a2d2d 0%, #3d1e1e 100%);
+  border: 1px solid #7a3d3d;
+  border-radius: 4px;
+  color: #e0e0e0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-reset-btn:hover {
+  background: linear-gradient(135deg, #7a3d3d 0%, #5a2d2d 100%);
+  border-color: #ff6b6b;
+}
+
+.section-reset-btn {
+  padding: 0.2rem 0.4rem;
+  font-size: 0.65rem;
+  background: linear-gradient(135deg, #5a2d2d 0%, #3d1e1e 100%);
+  border: 1px solid #7a3d3d;
+  border-radius: 4px;
+  color: #e0e0e0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: auto;
+}
+
+.section-reset-btn:hover {
+  background: linear-gradient(135deg, #7a3d3d 0%, #5a2d2d 100%);
+  border-color: #ff6b6b;
+}
+
+.unlock-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .global-reset-container {
+    position: static;
+    transform: none;
+  }
+}
