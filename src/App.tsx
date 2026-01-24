@@ -146,7 +146,7 @@ const BOSSES: Boss[] = [
   { name: 'Amoxliatl', points: 5 },
   { name: 'Araxxor', points: 13 },
   { name: 'Artio', points: 10 },
-  { name: 'Barrows Brothers', points: 30 },
+  { name: 'Barrows Brothers', points: 5 },
   { name: 'Bryophyta', points: 15 },
   { name: 'Callisto', points: 10 },
   { name: "Calvar'ion", points: 10 },
